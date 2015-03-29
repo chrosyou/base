@@ -30,7 +30,7 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="AnalyseCmdLine.h">
+    <ClInclude Include="baselib\pathhelp\AnalyseCmdLine.h">
       <Filter>baselib\pathhelp</Filter>
     </ClInclude>
   </ItemGroup>
