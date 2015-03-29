@@ -23,6 +23,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	test.wsFilePath = _T("E:\\work\\base\\base\\Release\\testmfc.exe");
 
 	ModifyPEAttribute(test);
+	int i;
 
 	return 0;
 }
