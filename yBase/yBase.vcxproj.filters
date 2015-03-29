@@ -48,6 +48,9 @@
     <ClInclude Include="baselib\baselib.h">
       <Filter>baselib</Filter>
     </ClInclude>
+    <ClInclude Include="baselib\pathhelp\filepath.h">
+      <Filter>baselib\pathhelp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -55,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="yBase.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="baselib\pathhelp\filepath.cpp">
+      <Filter>baselib\pathhelp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
