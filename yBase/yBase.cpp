@@ -2,11 +2,19 @@
 //
 
 #include "stdafx.h"
+#include "AnalyseCmdLine.h"
 
 
-int _tmain(int argc, _TCHAR* argv[])
+int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
+					   _In_opt_ HINSTANCE hPrevInstance,
+					   _In_ LPTSTR    lpCmdLine,
+					   _In_ int       nCmdShow)
 {
-	int i;
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+
+	// TODO: 在此放置代码。
+	base::strings::CCmdLine cmd(lpCmdLine);
 
 	return 0;
 }

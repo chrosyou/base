@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="baselib">
+      <UniqueIdentifier>{33b2353b-1dbc-42a4-81e2-40b39afd981b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="baselib\pathhelp">
+      <UniqueIdentifier>{a16a00b4-5ce9-487d-aa04-80ef333c9df5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -23,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AnalyseCmdLine.h">
+      <Filter>baselib\pathhelp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
