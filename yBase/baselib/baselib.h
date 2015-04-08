@@ -5,3 +5,7 @@
 #include "pathhelp\MsAnalyseCmdLine.h"
 
 #include "win32ulity\resource\ApplicationAttribute.h"
+
+
+//design pattern
+#include "DesignPattern/Factory.h"

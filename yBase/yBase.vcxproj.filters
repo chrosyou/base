@@ -25,6 +25,9 @@
     <Filter Include="baselib\win32ulity\resource">
       <UniqueIdentifier>{87631e50-cda2-4ef2-af74-3954f3cc0e08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="baselib\DesignPattern">
+      <UniqueIdentifier>{9387e6a3-ad4d-4dc9-8ad2-8853098ab287}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -50,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="baselib\win32ulity\resource\DynamicRun.h">
       <Filter>baselib\win32ulity\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="baselib\DesignPattern\Factory.h">
+      <Filter>baselib\DesignPattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
