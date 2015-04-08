@@ -4,6 +4,7 @@
 #include <string>
 #pragma  comment(lib, "Version.lib")
 
+//msdn中有12种产品的信息
 typedef struct _ATTINFO
 {
 	std::wstring wsFilePath;		//待修改的文件路径
@@ -359,4 +360,46 @@ void Build(LPCTSTR lpszFile)
 			delete [] lpBuffer;
 		}
 	}
+}
+
+//将程序中的资源导出
+bool GetResource(HINSTANCE hInstance, LPCTSTR lpFilePath)
+{
+	bool iRet = false;
+	HRSRC hResInfo = ::FindResource(NULL, MAKEINTRESOURCE(0),_T("mttype"));
+	HGLOBAL hRes = ::LoadResource(NULL, hResInfo);
+
+	LPVOID Data = ::LockResource(hRes);   // 找到并锁定资源
+	DWORD nSize = ::SizeofResource(hInstance, hResInfo);   	// 资源大小
+
+	BYTE *pBuf = new BYTE[nSize];
+	if(pBuf == NULL)
+	{
+		return FALSE;
+	}
+	memcpy(pBuf, Data, nSize);
+	DeleteFile(lpFilePath);
+
+	HANDLE hOptFile = ::CreateFile(lpFilePath, GENERIC_WRITE, 0, NULL,CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hOptFile == INVALID_HANDLE_VALUE) { return false; }
+	DWORD written = 0;
+	if (::WriteFile(hOptFile, pBuf, nSize, &written, NULL))  /*Features, winapi*/
+	{
+	 	iRet = true;
+	}
+	::CloseHandle(hOptFile);
+
+
+	delete pBuf;
+	return iRet;
+}
+
+//移动鼠标，模拟鼠标键盘操作
+long MouseMove()
+{
+	SetCursorPos(20, 50);
+	mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
+	mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+
+	return 0;
 }
