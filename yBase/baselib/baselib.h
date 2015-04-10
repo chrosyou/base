@@ -9,3 +9,4 @@
 
 //design pattern
 #include "DesignPattern/Factory.h"
+#include "DesignPattern/FactoryMethod.h"

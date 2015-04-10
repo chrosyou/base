@@ -57,6 +57,9 @@
     <ClInclude Include="baselib\DesignPattern\Factory.h">
       <Filter>baselib\DesignPattern</Filter>
     </ClInclude>
+    <ClInclude Include="baselib\DesignPattern\FactoryMethod.h">
+      <Filter>baselib\DesignPattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

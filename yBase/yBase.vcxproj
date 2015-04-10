@@ -83,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="baselib\baselib.h" />
     <ClInclude Include="baselib\DesignPattern\Factory.h" />
+    <ClInclude Include="baselib\DesignPattern\FactoryMethod.h" />
     <ClInclude Include="baselib\pathhelp\AnalyseCmdLine.h" />
     <ClInclude Include="baselib\pathhelp\MsAnalyseCmdLine.h" />
     <ClInclude Include="baselib\win32ulity\resource\ApplicationAttribute.h" />

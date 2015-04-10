@@ -14,14 +14,12 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: 在此放置代码。
-	Operator* add = FactoryOperator::CreateOperator(_T("/"));
-	add->SetOpeA(1.5);
-	add->SetOpeB(2.5);
-	double dRet = add->GetResult();
-	//test.CreateOperator(_T("+"));
+	CConcreteCreator<CWindowsProduct> test(_T("test"));
+	COsProduct* windows = test.Create();
+	windows->Start();
 
 
-
+	system("pause");
 	return 0;
 }
 
