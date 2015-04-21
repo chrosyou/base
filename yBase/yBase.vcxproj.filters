@@ -60,6 +60,12 @@
     <ClInclude Include="baselib\DesignPattern\FactoryMethod.h">
       <Filter>baselib\DesignPattern</Filter>
     </ClInclude>
+    <ClInclude Include="baselib\win32ulity\resource\WindowOperator.h">
+      <Filter>baselib\win32ulity\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -68,5 +74,10 @@
     <ClCompile Include="yBase.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="yBase.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

