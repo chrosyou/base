@@ -83,10 +83,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baselib\baselib.h" />
+    <ClInclude Include="baselib\DesignPattern\Factory.h" />
+    <ClInclude Include="baselib\DesignPattern\FactoryMethod.h" />
     <ClInclude Include="baselib\pathhelp\AnalyseCmdLine.h" />
     <ClInclude Include="baselib\pathhelp\filepath.h" />
     <ClInclude Include="baselib\pathhelp\MsAnalyseCmdLine.h" />
     <ClInclude Include="baselib\win32ulity\resource\ApplicationAttribute.h" />
+    <ClInclude Include="baselib\win32ulity\resource\DynamicRun.h" />
+    <ClInclude Include="baselib\win32ulity\resource\WindowOperator.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -97,6 +102,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="yBase.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="yBase.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

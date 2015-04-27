@@ -25,6 +25,9 @@
     <Filter Include="baselib\win32ulity\resource">
       <UniqueIdentifier>{87631e50-cda2-4ef2-af74-3954f3cc0e08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="baselib\DesignPattern">
+      <UniqueIdentifier>{9387e6a3-ad4d-4dc9-8ad2-8853098ab287}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -48,8 +51,25 @@
     <ClInclude Include="baselib\baselib.h">
       <Filter>baselib</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="baselib\pathhelp\filepath.h">
       <Filter>baselib\pathhelp</Filter>
+=======
+    <ClInclude Include="baselib\win32ulity\resource\DynamicRun.h">
+      <Filter>baselib\win32ulity\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="baselib\DesignPattern\Factory.h">
+      <Filter>baselib\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="baselib\DesignPattern\FactoryMethod.h">
+      <Filter>baselib\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="baselib\win32ulity\resource\WindowOperator.h">
+      <Filter>baselib\win32ulity\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+>>>>>>> 82f33dbc686d4cb5fdf832b6bc078d806c1be839
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,5 +82,10 @@
     <ClCompile Include="baselib\pathhelp\filepath.cpp">
       <Filter>baselib\pathhelp</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="yBase.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
