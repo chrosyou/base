@@ -1,6 +1,10 @@
 
 #pragma once
 
+/**
+简单工厂模式（Simple Factory Pattern）属于类的创新型模式，又叫静态工厂方法模式
+*/
+
 class Operator
 {
 private:
@@ -79,6 +83,13 @@ public:
 	}
 
 };
+
+/***********************************************************************
+	Operator* test = FactoryOperator::CreateOperator(_T("+"));
+	test->SetOpeA(1);
+	test->SetOpeB(2);	
+	double a = test->GetResult();
+***********************************************************************/
 
 
 

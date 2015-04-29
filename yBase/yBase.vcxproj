@@ -83,8 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baselib\baselib.h" />
+    <ClInclude Include="baselib\DesignPattern\DesignPattern.h" />
     <ClInclude Include="baselib\DesignPattern\Factory.h" />
     <ClInclude Include="baselib\DesignPattern\FactoryMethod.h" />
+    <ClInclude Include="baselib\DesignPattern\Stragery.h" />
     <ClInclude Include="baselib\pathhelp\AnalyseCmdLine.h" />
     <ClInclude Include="baselib\pathhelp\filepath.h" />
     <ClInclude Include="baselib\pathhelp\MsAnalyseCmdLine.h" />

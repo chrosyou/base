@@ -14,10 +14,12 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: 在此放置代码。
+	Context test(new StrageryA);
+	DWORD dwRet = test.Operator();
 
-	CConcreteCreator<CWindowsProduct> test(_T("test"));
-	COsProduct* windows = test.Create();
-	windows->Start();
+//	CConcreteCreator<CWindowsProduct> test(_T("test"));
+//	COsProduct* windows = test.Create();
+//	windows->Start();
 
 
 	system("pause");

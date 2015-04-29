@@ -637,3 +637,22 @@ DWORD GetWindowsString()
 
 	return 0;
 }
+
+//窗口置顶
+DWORD PutWindowtoFront()
+{
+	std::wstring strClassName = _T("classname");
+	std::wstring strTitleName = _T("titlename");
+
+	LPCTSTR lpClassName = IsStringEmpty(strClassName);
+	LPCTSTR lpTitleName = IsStringEmpty(strTitleName);
+
+	HWND hwnd = ::FindWindow(lpClassName, lpTitleName);
+	if (NULL == hwnd)
+	{
+		return 0;
+	}
+
+	::SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE|SWP_NOSIZE);
+	return 0;
+}
