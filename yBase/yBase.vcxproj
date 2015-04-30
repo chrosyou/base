@@ -87,6 +87,7 @@
     <ClInclude Include="baselib\DesignPattern\DesignPattern.h" />
     <ClInclude Include="baselib\DesignPattern\Factory.h" />
     <ClInclude Include="baselib\DesignPattern\FactoryMethod.h" />
+    <ClInclude Include="baselib\DesignPattern\Proxy.h" />
     <ClInclude Include="baselib\DesignPattern\Stragery.h" />
     <ClInclude Include="baselib\pathhelp\AnalyseCmdLine.h" />
     <ClInclude Include="baselib\pathhelp\filepath.h" />

@@ -78,6 +78,9 @@
     <ClInclude Include="baselib\DesignPattern\Decorate.h">
       <Filter>baselib\DesignPattern</Filter>
     </ClInclude>
+    <ClInclude Include="baselib\DesignPattern\Proxy.h">
+      <Filter>baselib\DesignPattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
