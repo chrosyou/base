@@ -75,6 +75,9 @@
     <ClInclude Include="baselib\DesignPattern\Stragery.h">
       <Filter>baselib\DesignPattern</Filter>
     </ClInclude>
+    <ClInclude Include="baselib\DesignPattern\Decorate.h">
+      <Filter>baselib\DesignPattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
