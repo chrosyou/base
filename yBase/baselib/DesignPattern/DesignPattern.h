@@ -6,3 +6,4 @@
 #include "Stragery.h"
 #include "Decorate.h"
 #include "Proxy.h"
+#include "Observer.h"

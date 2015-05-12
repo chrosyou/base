@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baselib\baselib.h" />
+    <ClInclude Include="baselib\DesignPattern\constuse.h" />
     <ClInclude Include="baselib\DesignPattern\Decorate.h" />
     <ClInclude Include="baselib\DesignPattern\DesignPattern.h" />
     <ClInclude Include="baselib\DesignPattern\Factory.h" />
