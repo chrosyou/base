@@ -84,6 +84,9 @@
     <ClInclude Include="baselib\DesignPattern\constuse.h">
       <Filter>baselib\DesignPattern</Filter>
     </ClInclude>
+    <ClInclude Include="baselib\DesignPattern\Observer.h">
+      <Filter>baselib\DesignPattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
