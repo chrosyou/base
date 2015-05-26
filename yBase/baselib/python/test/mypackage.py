@@ -1,6 +1,8 @@
 
-import sys
-import calc
+import Kitchen
 
-a = calc.sub(2, 3);
-print((calc.__doc__));
+a = Kitchen.Friage();
+a.add_one("apea");
+print(a.items);
+print(dir(Kitchen));
+#print(dir(Kitchen.Friage))

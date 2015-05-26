@@ -1,5 +1,5 @@
 
-class Fridge :
+class Friage :
     '''test'''
 
     def __init__(self, items={}) :
@@ -35,20 +35,4 @@ class Fridge :
         return ;
         
     
-
-f = Fridge({"egga":6, "milk":2});
-print(f.items);
-f.add_one("apple");
-print(f.items);
-f.add_many({"pear":3, "grape":4});
-print(f.items);
-
-#print(dir(f));
-
-a = {"pear":3, "grape":4};
-print(a["pear"]);
-try :
-    print(a["apple"]);
-except KeyRrror :
-    print("error")
 
