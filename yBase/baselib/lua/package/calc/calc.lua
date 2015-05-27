@@ -4,7 +4,7 @@ local tmpCalc =
 	status = 2;
 }
 
-function tmpCalc.Add(a, b)
+function tmpCalc:Add(a, b)
 	return a + b;
 end
 
@@ -15,7 +15,5 @@ end
 function Test(a, b)
 	return a + b;
 end
-
-a = 1;
 
 Calc = tmpCalc;
