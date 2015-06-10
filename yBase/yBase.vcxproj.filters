@@ -28,6 +28,9 @@
     <Filter Include="baselib\DesignPattern">
       <UniqueIdentifier>{9387e6a3-ad4d-4dc9-8ad2-8853098ab287}</UniqueIdentifier>
     </Filter>
+    <Filter Include="baselib\com">
+      <UniqueIdentifier>{ad90df36-05e0-4a1c-9c84-9d387ae5c7ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -86,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="baselib\DesignPattern\Observer.h">
       <Filter>baselib\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="baselib\com\IUnknow.h">
+      <Filter>baselib\com</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

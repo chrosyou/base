@@ -10,3 +10,7 @@
 
 //design pattern
 #include "DesignPattern/DesignPattern.h"
+
+
+//com
+#include "com/IUnknow.h"

@@ -15,10 +15,12 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	// TODO: 在此放置代码。
 
+	VOID* test = new CUser;
+	IX* pIx = (IX*)test;
+	pIx->Print();
 
-//	CConcreteCreator<CWindowsProduct> test(_T("test"));
-//	COsProduct* windows = test.Create();
-//	windows->Start();
+	IY* pIy = static_cast<IY*>(test);
+	pIy->Print();
 
 
 	//system("pause");
