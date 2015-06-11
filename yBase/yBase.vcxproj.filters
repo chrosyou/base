@@ -90,7 +90,7 @@
     <ClInclude Include="baselib\DesignPattern\Observer.h">
       <Filter>baselib\DesignPattern</Filter>
     </ClInclude>
-    <ClInclude Include="baselib\com\IUnknow.h">
+    <ClInclude Include="baselib\com\IUnknown.h">
       <Filter>baselib\com</Filter>
     </ClInclude>
   </ItemGroup>
@@ -103,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="baselib\pathhelp\filepath.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="baselib\com\IUnknown.cpp">
+      <Filter>baselib\com</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

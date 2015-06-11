@@ -4,8 +4,10 @@
 #include "stdafx.h"
 #include "TestMain.h"
 #include "baseoperator.h"
+#include "yBase/baselib/com/IUnknown.h"
 
 typedef HRESULT (__stdcall* MyDllCreateObject)(void **ppv );
+typedef HRESULT (__stdcall* IUDllCreateObject)(void **ppv );
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -16,25 +18,31 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
  	// TODO: 在此放置代码。
-	HMODULE hWnd = LoadLibraryW(L"TestDll.dll");
+	HMODULE hWnd = LoadLibraryW(L"IUnknowd.dll");
 	if (hWnd == NULL)
 	{
 		return 1;
 	}
 
-	MyDllCreateObject test = (MyDllCreateObject)GetProcAddress(hWnd, "DllCreateObject");
+	IUDllCreateObject test = (IUDllCreateObject)GetProcAddress(hWnd, "DllCreateObject");
 
 	if (NULL == test)
 	{
 		return 2;
 	}
 
-	BaseOpreator* lpBase = NULL;
-	test((void**)(&lpBase));
+	IUnknow* pI = NULL;
+	test((void**)&pI);
 
-	POINT pos;
-	lpBase->GetMousePos(pos);
+	IX* pX = NULL;
+	HRESULT hr = pI->QueryInterface(2, (void**)&pX);
+	if (SUCCEEDED(hr))
+	{
+		pX->PrintX();
+		pX->Release();
+	}
 
+	pI->Release();
 
 	return 0;
 }

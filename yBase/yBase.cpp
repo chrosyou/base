@@ -15,13 +15,19 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
 	// TODO: 在此放置代码。
 
-	VOID* test = new CUser;
-	IX* pIx = (IX*)test;
-	pIx->Print();
+	IUnknow* pI = CreateInstance();
 
-	IY* pIy = static_cast<IY*>(test);
-	pIy->Print();
+	IX* pIX = NULL;
+	HRESULT hr = pI->QueryInterface(2, (void**)&pIX);
+	if (SUCCEEDED(hr))
+	{
+		pIX->PrintX();
+		pIX->Release();
+		pIX->PrintX();
+	}
 
+
+	pI->Release();
 
 	//system("pause");
 	return 0;

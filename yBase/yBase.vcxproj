@@ -41,11 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)yBase\baselib\pathhelp\;$(SolutionDir)yBase\baselib\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)yBase\baselib\pathhelp\;$(SolutionDir)yBase\baselib\;$(SolutionDir)yBase\baselib\com\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)yBase\baselib\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)yBase\baselib\;$(SolutionDir)yBase\baselib\com\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -54,6 +54,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="baselib\baselib.h" />
-    <ClInclude Include="baselib\com\IUnknow.h" />
+    <ClInclude Include="baselib\com\IUnknown.h" />
     <ClInclude Include="baselib\DesignPattern\constuse.h" />
     <ClInclude Include="baselib\DesignPattern\Decorate.h" />
     <ClInclude Include="baselib\DesignPattern\DesignPattern.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="baselib\com\IUnknown.cpp" />
     <ClCompile Include="baselib\pathhelp\filepath.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
