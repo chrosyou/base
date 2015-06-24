@@ -8,8 +8,9 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 
 	FLAGS_log_dir = "D:\\glog";
+	FLAGS_max_log_size = 4;  //最大日志文件大小 4M 
 	google::InitGoogleLogging("abc.exe");
-	LOG(INFO) << "我在InitInstance()";   // 记录一个INFO等级的日志"我在InitInstance()"
+	LOG(INFO) << "test";
 	google::ShutdownGoogleLogging(); 
 
 	return 0;
