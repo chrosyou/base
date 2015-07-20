@@ -204,7 +204,7 @@ SocketClient::SocketClient(const std::string& host, int port) : Socket() {
 
   hostent *he;
   if ((he = gethostbyname(host.c_str())) == 0) {
-	  char ctemp[80] = {0};
+	char ctemp[80] = {0};
     error = strerror_s(ctemp, 80, errno);
     throw error;
   }

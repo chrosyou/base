@@ -12,11 +12,12 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+
 	try {
-		SocketClient s("www.google.com", 80);
+		SocketClient s("www.baidu.com", 80);
 
 		s.SendLine("GET / HTTP/1.0");
-		s.SendLine("Host: www.google.com");
+		s.SendLine("Host: www.baidu.com");
 		s.SendLine("");
 
 		while (1) {
