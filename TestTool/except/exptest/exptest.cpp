@@ -11,6 +11,7 @@ double divtest(double a, double b)
 		throw "argument is not right";
 	}
 
+
 	return a / b;
 }
 
