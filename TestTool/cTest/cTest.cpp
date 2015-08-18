@@ -1,16 +1,14 @@
 
 #include <iostream>
 
+typedef struct _NODE
+{
+	int a;
+	_NODE* next;
+}NODE;
+
 int main()
 {
-	bool a = false;
-	if (a)
-	{
-		printf("test");
-	}
-	else
-	{
-		printf("false");
-	}
+	NODE test[20] = {0};
 	return 0;
 }
