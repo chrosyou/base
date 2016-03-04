@@ -4,8 +4,27 @@
 #include "stdafx.h"
 #include "CreateDump.h"
 #include <imagehlp.h>
+#include <windows.h>
+#include <string>
 
 #pragma comment(lib,"Dbghelp.lib")
+
+// definition of COCriticalSectionHelper
+class COCriticalSectionHelper
+{
+public:
+	COCriticalSectionHelper( CRITICAL_SECTION* cs )	{
+		m_cs = cs;
+		EnterCriticalSection( m_cs );
+	}
+	~COCriticalSectionHelper()	{
+		LeaveCriticalSection( m_cs );
+	}
+protected:
+	CRITICAL_SECTION* m_cs;
+};	// end of class COCriticalSectionHelper
+
+#define _MANAGE_CRITICAL_SECTION( cs )	COCriticalSectionHelper helper( cs )
 
 // 异常处理函数
 LONG WINAPI EL_UnhandledExceptionFilterFunc(PEXCEPTION_POINTERS pExceptionInfo)
@@ -31,6 +50,11 @@ LONG WINAPI EL_UnhandledExceptionFilterFunc(PEXCEPTION_POINTERS pExceptionInfo)
 	return true;
 }
 
+std::wstring Test()
+{
+	return false;
+}
+
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -42,10 +66,13 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
  	// TODO: 在此放置代码。
 	SetUnhandledExceptionFilter(EL_UnhandledExceptionFilterFunc);
-	
-	int i = 0;
-	int j = 1 / i;
 
+	CRITICAL_SECTION cs; //可以理解为锁定一个资源
+	InitializeCriticalSection( &cs );
+	
+	_MANAGE_CRITICAL_SECTION( &cs );
+
+	std::wstring tmp = Test();
 
 	return 0;
 }

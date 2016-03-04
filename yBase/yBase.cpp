@@ -14,20 +14,17 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: 在此放置代码。
+	TCHAR szLogicDriveStrings[MAX_PATH];
 
-	IUnknow* pI = CreateInstance();
+	ZeroMemory(szLogicDriveStrings, MAX_PATH);
 
-	IX* pIX = NULL;
-	HRESULT hr = pI->QueryInterface(2, (void**)&pIX);
-	if (SUCCEEDED(hr))
-	{
-		pIX->PrintX();
-		pIX->Release();
-		pIX->PrintX();
-	}
+	DWORD dwLen = GetLogicalDriveStringsW(MAX_PATH - 1, szLogicDriveStrings);
+	DWORD dwNum = dwLen / sizeof(TCHAR);
+	UINT uDriverType = GetDriveTypeW(szLogicDriveStrings);
+	//DRIVE_UNKNOWN
 
-
-	pI->Release();
+	std::vector<std::wstring> vecProcess;
+	base::proc::EnumProcess(vecProcess);
 
 	//system("pause");
 	return 0;

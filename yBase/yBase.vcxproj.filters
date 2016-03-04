@@ -31,6 +31,9 @@
     <Filter Include="baselib\com">
       <UniqueIdentifier>{ad90df36-05e0-4a1c-9c84-9d387ae5c7ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="baselib\osHelper">
+      <UniqueIdentifier>{1b33450b-6cd5-4a96-9311-275d8aa6d2c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -93,6 +96,9 @@
     <ClInclude Include="baselib\com\IUnknown.h">
       <Filter>baselib\com</Filter>
     </ClInclude>
+    <ClInclude Include="baselib\osHelper\ProcessHelper.h">
+      <Filter>baselib\osHelper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -106,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="baselib\com\IUnknown.cpp">
       <Filter>baselib\com</Filter>
+    </ClCompile>
+    <ClCompile Include="baselib\osHelper\ProcessHelper.cpp">
+      <Filter>baselib\osHelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
